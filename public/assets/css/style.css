@@ -62,6 +62,10 @@
   list-style: none;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
   color: #fff;
   background-color: #0c0c0c;

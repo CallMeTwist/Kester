@@ -3,7 +3,7 @@ import React from 'react';
 const About = () => {
     return (
         <div>
-            <section className="section-padding sub-bg" data-scroll-index="2">
+            <section className="section-padding sub-bg" data-scroll-index="2" id="about">
                 <div className="container">
                     <div className="row lg-marg justify-content-around">
                         <div className="col-lg-5 about">

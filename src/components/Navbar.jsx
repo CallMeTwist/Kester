@@ -8,8 +8,8 @@ const Navbar = () => {
                     <div className="row">
                         <div className="col-lg-3 col-6 order1">
                             <div className="bord">
-                                <a className="logo icon-img-70" href="#">
-                                    <img src="/assets/imgs/Twist();(1).png" alt="logo"/>
+                                <a className="logo icon-img-70" href="#home">
+                                    <img src="/assets/imgs/logo-light.png" alt="logo"/>
                                 </a>
                             </div>
                         </div>
@@ -18,23 +18,23 @@ const Navbar = () => {
                                 <div className="full-width">
                                     <ul className="navbar-nav">
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#0" data-scroll-nav="0"><span
+                                            <a className="nav-link" href="#home" data-scroll-nav="0"><span
                                                 className="rolling-text">Home</span></a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#0" data-scroll-nav="2"><span
+                                            <a className="nav-link" href="#about" data-scroll-nav="2"><span
                                                 className="rolling-text">About</span></a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#0" data-scroll-nav="1"><span
+                                            <a className="nav-link" href="#services" data-scroll-nav="1"><span
                                                 className="rolling-text">Services</span></a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#0" data-scroll-nav="3"><span
+                                            <a className="nav-link" href="#portfolio" data-scroll-nav="3"><span
                                                 className="rolling-text">Portfolio</span></a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#0" data-scroll-nav="5"><span
+                                            <a className="nav-link" href="#contact" data-scroll-nav="5"><span
                                                 className="rolling-text">Contact</span></a>
                                         </li>
                                     </ul>

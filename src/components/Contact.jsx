@@ -3,7 +3,7 @@ import React from 'react';
 const Contact = () => {
     return (
         <div>
-            <section className="contact section-padding" data-scroll-index="5">
+            <section className="contact section-padding" data-scroll-index="5" id="contact">
                 <div className="container">
                     <div className="sec-head mb-80 wow fadeIn">
                         <div className="row justify-content-center">

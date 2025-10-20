@@ -3,7 +3,7 @@ import React from 'react';
 const Services = () => {
     return (
         <div>
-            <section className="services serv2 section-padding" data-scroll-index="1">
+            <section className="services serv2 section-padding" data-scroll-index="1" id="services">
                 <div className="container">
                     <div className="sec-head mb-80 wow fadeIn">
                         <div className="row justify-content-center">

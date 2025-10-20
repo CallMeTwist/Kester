@@ -3,7 +3,7 @@ import React from 'react';
 const Portfolio = () => {
     return (
         <div>
-            <section className="portfolio section-padding" data-scroll-index="3">
+            <section className="portfolio section-padding" data-scroll-index="3" id="portfolio">
                 <div className="container">
                     <div className="sec-head mb-40 wow fadeIn">
                         <div className="row justify-content-center">
@@ -25,7 +25,7 @@ const Portfolio = () => {
                                 <div className="item">
                                     <div className="img">
                                         <img src="/assets/imgs/works/1.jpg" alt=""/>
-                                        <a href="project-details.html" className="link"></a>
+                                        <a href="#" className="link"></a>
                                     </div>
                                     <div className="cont d-flex align-items-center">
                                         <div>
@@ -34,11 +34,11 @@ const Portfolio = () => {
                                         </div>
                                         <div className="ml-auto">
                                             <div className="arrow">
-                                                <a href="project-details.html">
+                                                <a href="#">
                                                     <svg className="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                          viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                         style="stroke-width: 2;">
+                                                         style={{ strokeWidth: 2 }}>
                                                     <line x1="0" y1="16" x2="33" y2="16"></line>
                                                         <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
                                                         <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
@@ -53,7 +53,7 @@ const Portfolio = () => {
                                 <div className="item">
                                     <div className="img">
                                         <img src="/assets/imgs/works/2.jpg" alt=""/>
-                                        <a href="project-details.html" className="link"></a>
+                                        <a href="#" className="link"></a>
                                     </div>
                                     <div className="cont d-flex align-items-center">
                                         <div>
@@ -62,11 +62,11 @@ const Portfolio = () => {
                                         </div>
                                         <div className="ml-auto">
                                             <div className="arrow">
-                                                <a href="project-details.html">
+                                                <a href="#">
                                                     <svg className="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                          viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                         style="stroke-width: 2;">
+                                                         style={{ strokeWidth: 2 }}>
                                                     <line x1="0" y1="16" x2="33" y2="16"></line>
                                                         <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
                                                         <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
@@ -81,7 +81,7 @@ const Portfolio = () => {
                                 <div className="item">
                                     <div className="img">
                                         <img src="/assets/imgs/works/3.jpg" alt=""/>
-                                        <a href="project-details.html" className="link"></a>
+                                        <a href="#" className="link"></a>
                                     </div>
                                     <div className="cont d-flex align-items-center">
                                         <div>
@@ -90,11 +90,11 @@ const Portfolio = () => {
                                         </div>
                                         <div className="ml-auto">
                                             <div className="arrow">
-                                                <a href="project-details.html">
+                                                <a href="#">
                                                     <svg className="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                          viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                         style="stroke-width: 2;">
+                                                         style={{ strokeWidth: 2 }}>
                                                     <line x1="0" y1="16" x2="33" y2="16"></line>
                                                         <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
                                                         <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
@@ -109,7 +109,7 @@ const Portfolio = () => {
                                 <div className="item">
                                     <div className="img">
                                         <img src="/assets/imgs/works/4.jpg" alt=""/>
-                                        <a href="project-details.html" className="link"></a>
+                                        <a href="#" className="link"></a>
                                     </div>
                                     <div className="cont d-flex align-items-center">
                                         <div>
@@ -118,11 +118,11 @@ const Portfolio = () => {
                                         </div>
                                         <div className="ml-auto">
                                             <div className="arrow">
-                                                <a href="project-details.html">
+                                                <a href="#">
                                                     <svg className="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                          viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                         style="stroke-width: 2;">
+                                                         style={{ strokeWidth: 2 }}>
                                                     <line x1="0" y1="16" x2="33" y2="16"></line>
                                                         <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
                                                         <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
@@ -137,7 +137,7 @@ const Portfolio = () => {
                                 <div className="item">
                                     <div className="img">
                                         <img src="/assets/imgs/works/6.jpg" alt=""/>
-                                        <a href="project-details.html" className="link"></a>
+                                        <a href="#" className="link"></a>
                                     </div>
                                     <div className="cont d-flex align-items-center">
                                         <div>
@@ -146,11 +146,11 @@ const Portfolio = () => {
                                         </div>
                                         <div className="ml-auto">
                                             <div className="arrow">
-                                                <a href="project-details.html">
+                                                <a href="#">
                                                     <svg className="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                          viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                         style="stroke-width: 2;">
+                                                         style={{ strokeWidth: 2 }}>
                                                     <line x1="0" y1="16" x2="33" y2="16"></line>
                                                         <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
                                                         <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>
@@ -165,7 +165,7 @@ const Portfolio = () => {
                                 <div className="item">
                                     <div className="img">
                                         <img src="/assets/imgs/works/5.jpg" alt=""/>
-                                        <a href="project-details.html" className="link"></a>
+                                        <a href="#" className="link"></a>
                                     </div>
                                     <div className="cont d-flex align-items-center">
                                         <div>
@@ -174,11 +174,11 @@ const Portfolio = () => {
                                         </div>
                                         <div className="ml-auto">
                                             <div className="arrow">
-                                                <a href="project-details.html">
+                                                <a href="#">
                                                     <svg className="arrow-right" xmlns="http://www.w3.org/2000/svg"
                                                          xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                                          viewBox="0 0 34.2 32.3" xml:space="preserve"
-                                                         style="stroke-width: 2;">
+                                                         style={{ strokeWidth: 2 }}>
                                                     <line x1="0" y1="16" x2="33" y2="16"></line>
                                                         <line x1="17.3" y1="0.7" x2="33.2" y2="16.5"></line>
                                                         <line x1="17.3" y1="31.6" x2="33.5" y2="15.4"></line>

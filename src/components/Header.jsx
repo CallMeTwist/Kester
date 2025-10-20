@@ -3,7 +3,7 @@ import React from 'react';
 const Header = () => {
     return (
         <>
-            <section className="header-crev bord-thin-bottom" data-scroll-index="0">
+            <section className="header-crev bord-thin-bottom" data-scroll-index="0" id="home">
                 <div className="container">
                     <div className="row">
                         <div className="col-lg-6 valign">

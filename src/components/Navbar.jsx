@@ -22,7 +22,7 @@ const Navbar = () => {
                                                 className="rolling-text">Home</span></a>
                                         </li>
                                         <li className="nav-item">
-                                            <a className="nav-link" href="#about" data-scroll-nav="2"><span
+                                            <a className="nav-link" data-scroll-nav="2"><span
                                                 className="rolling-text">About</span></a>
                                         </li>
                                         <li className="nav-item">

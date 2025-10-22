@@ -1,748 +1,352 @@
 window.initThemeScripts = function () {
 
-// ✅ EVERYTHING currently in scripts.js goes inside this function
     $(function () {
-
         "use strict";
 
         var wind = $(window);
 
-
         /* =============================================================================
-        -----------------------------  Smooth Scroll nav   -----------------------------
+        -----------------------------  Navbar Menu Toggle   -----------------------------
         ============================================================================= */
-
-
-        // $.scrollIt({
-        //     upKey: 38,                // key code to navigate to the next section
-        //     downKey: 40,              // key code to navigate to the previous section
-        //     easing: 'ease-in-out',          // the easing function for animation
-        //     scrollTime: 600,          // how long (in ms) the animation takes
-        //     activeClass: 'active',    // class given to the active nav element
-        //     onPageChange: null,       // function(pageIndex) that is called when page is changed
-        //     topOffset: 0            // offste (in px) for fixed top navigation
-        // });
-
-        /* =============================================================================
-        --------------------------------  Navbar Menu   --------------------------------
-        ============================================================================= */
-
         if (!window.__navbarTogglerFixed) {
             window.__navbarTogglerFixed = true;
 
-            $(".navbar").on("click", ".navbar-toggler", function () {
-                $(".navbar .bg").slideToggle();
+            $(".navbar")
+                .off(".navToggleTheme")
+                .on("click.navToggleTheme", ".navbar-toggler", function () {
+                    $(".navbar .bg").slideToggle();
+                });
+        }
+
+        /* =============================================================================
+        -----------------------------  Navbar Scroll Effect  -----------------------------
+        ============================================================================= */
+        if (!window.__navbarScrollBound) {
+            window.__navbarScrollBound = true;
+
+            wind.off("scroll.navScrollTheme").on("scroll.navScrollTheme", function () {
+                const bodyScroll = wind.scrollTop(),
+                    navbar = $(".navbar-chang");
+
+                if (bodyScroll > 300) {
+                    navbar.addClass("nav-scroll");
+                } else {
+                    navbar.removeClass("nav-scroll");
+                }
             });
         }
 
+        /* =============================================================================
+        -----------------------------  Fixed Menu Tabs  -----------------------------
+        ============================================================================= */
+        $(".fixed-menu .menu-links a")
+            .off("click.fixedMenuTheme")
+            .on("click.fixedMenuTheme", function () {
+                const tab_id = $(this).attr("data-tab");
+                $(".fixed-menu .menu-links a").removeClass("active");
+                $(this).addClass("active");
 
-        wind.on("scroll", function () {
-
-            var bodyScroll = wind.scrollTop(),
-                navbar = $(".navbar-chang");
-
-            if (bodyScroll > 300) {
-
-                navbar.addClass("nav-scroll");
-
-            } else {
-
-                navbar.removeClass("nav-scroll");
-            }
-        });
-
-        function noScroll() {
-            window.scrollTo(0, 0);
-        }
-
+                $(".min-box .min-sec").removeClass("current");
+                $("#" + tab_id).addClass("current");
+            });
 
         /* =============================================================================
-        --------------------------------  Navbar Tabs   --------------------------------
+        -----------------------------  Data Backgrounds  -----------------------------
         ============================================================================= */
-
-        $('.fixed-menu .menu-links a').on('click', function () {
-            var tab_id = $(this).attr('data-tab');
-            $('.fixed-menu .menu-links a').removeClass('active');
-            $(this).addClass('active');
-
-            $('.min-box .min-sec').removeClass('current');
-            $("#" + tab_id).addClass('current');
-
-            if ($(this).hasClass('current')) {
-                return false;
-            }
-        });
-
-
-        /* =============================================================================
-        ------------------------------  Data Background   ------------------------------
-        ============================================================================= */
-
-        var pageSection = $(".bg-img, section");
-        pageSection.each(function (indx) {
-
+        $(".bg-img, section").each(function () {
             if ($(this).attr("data-background")) {
                 $(this).css("background-image", "url(" + $(this).data("background") + ")");
             }
         });
 
+        /* =============================================================================
+        -----------------------------  Tabs  -----------------------------
+        ============================================================================= */
+        $("#tabs .tab-links")
+            .off("click.tabsTheme")
+            .on("click.tabsTheme", ".item-link", function () {
+                const tab_id = $(this).attr("data-tab");
+                $("#tabs .tab-links .item-link").removeClass("current");
+                $(this).addClass("current");
+                $(".tab-content").hide();
+                $("#" + tab_id).show();
+            });
+
+        $("#tabs-fade .tab-links")
+            .off("click.tabsFadeTheme")
+            .on("click.tabsFadeTheme", ".item-link", function () {
+                const tab2_id = $(this).attr("data-tab");
+                $("#tabs-fade .tab-links .item-link").removeClass("current");
+                $(this).addClass("current");
+                $(".tab-content").fadeOut();
+                $("#" + tab2_id).fadeIn();
+            });
 
         /* =============================================================================
-        -----------------------------------  Tabs  -------------------------------------
+        -----------------------------  Accordion  -----------------------------
         ============================================================================= */
+        $(".accordion")
+            .off("click.accordionTheme")
+            .on("click.accordionTheme", ".title", function () {
+                $(this).next().slideDown();
+                $(".accordion-info").not($(this).next()).slideUp();
+            });
 
-        $('#tabs .tab-links').on('click', '.item-link', function () {
-
-            var tab_id = $(this).attr('data-tab');
-
-            $('#tabs .tab-links .item-link').removeClass('current');
-            $(this).addClass('current');
-
-            $('.tab-content').hide();
-            $("#" + tab_id).show();
-
-        });
-
-        $('#tabs-fade .tab-links').on('click', '.item-link', function () {
-
-            var tab2_id = $(this).attr('data-tab');
-
-            $('#tabs-fade .tab-links .item-link').removeClass('current');
-            $(this).addClass('current');
-
-            $('.tab-content').fadeOut();
-            $("#" + tab2_id).fadeIn();
-
-        });
-
+        $(".accordion")
+            .off("click.accordionTheme2")
+            .on("click.accordionTheme2", ".item", function () {
+                $(this).addClass("active").siblings().removeClass("active");
+            });
 
         /* =============================================================================
-        --------------------------------  Accordion  -----------------------------------
+        -----------------------------  Tooltip Hover  -----------------------------
         ============================================================================= */
-
-        $(".accordion").on("click", ".title", function () {
-
-            $(this).next().slideDown();
-
-            $(".accordion-info").not($(this).next()).slideUp();
-
-        });
-
-        $(".accordion").on("click", ".item", function () {
-
-            $(this).addClass("active").siblings().removeClass("active");
-
-        });
-
+        $('[data-tooltip-tit]')
+            .off("mouseenter.tooltipTheme mouseleave.tooltipTheme mousemove.tooltipTheme")
+            .on("mouseenter.tooltipTheme", function () {
+                $('<div class="div-tooltip-tit"></div>')
+                    .text($(this).attr("data-tooltip-tit"))
+                    .appendTo("body")
+                    .fadeIn("slow");
+            })
+            .on("mouseleave.tooltipTheme", function () {
+                $(".div-tooltip-tit").remove();
+            })
+            .on("mousemove.tooltipTheme", function (e) {
+                $(".div-tooltip-tit").css({ top: e.pageY + 10, left: e.pageX + 20 });
+            });
 
         /* =============================================================================
-        ---------------------------------  Tolltip  ------------------------------------
+        -----------------------------  Progress Bar Scroll  -----------------------------
         ============================================================================= */
-
-        $('[data-tooltip-tit]').hover(function () {
-            $('<div class="div-tooltip-tit"></div>').text($(this).attr('data-tooltip-tit')).appendTo('body').fadeIn('slow');
-        }, function () {
-            $('.div-tooltip-tit').remove();
-        }).mousemove(function (e) {
-            $('.div-tooltip-tit').css({ top: e.pageY + 10, left: e.pageX + 20 })
-        });
-
-        $('[data-tooltip-sub]').hover(function () {
-            $('<div class="div-tooltip-sub"></div>').text($(this).attr('data-tooltip-sub')).appendTo('body').fadeIn('slow');
-        }, function () {
-            $('.div-tooltip-sub').remove();
-        }).mousemove(function (e) {
-            $('.div-tooltip-sub').css({ top: e.pageY + (-15), left: e.pageX + 30 })
-        });
-
-        $(".fixed-menu a , .left-area .menu-links a").hover(
-            function () {
-                $(this).addClass("show");
-            }, function () {
-                $(this).removeClass("show");
-            }
-        );
-
-
-        /* =============================================================================
-        -------------------------------  Progress Bar  ---------------------------------
-        ============================================================================= */
-
-        wind.on('scroll', function () {
+        wind.off("scroll.progressTheme").on("scroll.progressTheme", function () {
             $(".skill-progress .progres").each(function () {
-                var bottom_of_object =
-                    $(this).offset().top + $(this).outerHeight();
-                var bottom_of_window =
-                    $(window).scrollTop() + $(window).height();
-                var myVal = $(this).attr('data-value');
+                const bottom_of_object = $(this).offset().top + $(this).outerHeight();
+                const bottom_of_window = $(window).scrollTop() + $(window).height();
+                const myVal = $(this).attr("data-value");
                 if (bottom_of_window > bottom_of_object) {
-                    $(this).css({
-                        width: myVal
-                    });
+                    $(this).css({ width: myVal });
                 }
             });
         });
 
-
         /* =============================================================================
-        -----------------------------  Trigger Plugins  --------------------------------
+        -----------------------------  Trigger Plugins  -----------------------------
         ============================================================================= */
-
-
-        /* ========== Sticky ========== */
-
         $("#sticky_item").stick_in_parent();
-
-
-        /* ========== YouTubePopUp ========== */
-
         $("a.vid").YouTubePopUp();
-
-
-        /* ========== parallaxie ========== */
-
-        $('.parallaxie').parallaxie({
-            speed: 0.8,
-            size: "cover"
+        $(".parallaxie").parallaxie({ speed: 0.8, size: "cover" });
+        $(".popup-img , .gallery").magnificPopup({
+            delegate: ".popimg",
+            type: "image",
+            gallery: { enabled: true },
         });
-
-
-        /* ========== magnificPopup ========== */
-
-        $('.popup-img , .gallery').magnificPopup({
-            delegate: '.popimg',
-            type: 'image',
-            gallery: {
-                enabled: true
-            }
-        });
-
-
-        /* =========== hover3d =========== */
-
-        $(".hover3d").hover3d({
-            selector: ".hover3d-child",
-            invert: true
-        });
-
-
-        /* =========== countUp =========== */
-
-        $('.number-sec .count').countUp({
-            delay: 10,
-            time: 500
-        });
-
-        /* ===========  Splitting  =========== */
-
+        $(".hover3d").hover3d({ selector: ".hover3d-child", invert: true });
+        $(".number-sec .count").countUp({ delay: 10, time: 500 });
         Splitting();
 
-    });
+        /* =============================================================================
+        -----------------------------  Wow.js Init  -----------------------------
+        ============================================================================= */
+        const wow = new WOW({ animateClass: "animated", offset: 100 });
+        wow.init();
 
+        /* =============================================================================
+        -----------------------------  Cursor Animation  -----------------------------
+        ============================================================================= */
+        (function () {
+            const link = document.querySelectorAll(".hover-this");
+            const cursor = document.querySelector(".cursor");
 
-    /* =============================================================================
-    -------------------------------  Wow Animation   -------------------------------
-    ============================================================================= */
+            const animateit = function (e) {
+                const hoverAnim = this.querySelector(".hover-anim");
+                const { offsetX: x, offsetY: y } = e,
+                    { offsetWidth: width, offsetHeight: height } = this,
+                    move = 25,
+                    xMove = (x / width) * (move * 2) - move,
+                    yMove = (y / height) * (move * 2) - move;
+                hoverAnim.style.transform = `translate(${xMove}px, ${yMove}px)`;
+                if (e.type === "mouseleave") hoverAnim.style.transform = "";
+            };
 
-    wow = new WOW({
-        animateClass: 'animated',
-        offset: 100
-    });
-    wow.init();
+            const editCursor = (e) => {
+                const { clientX: x, clientY: y } = e;
+                cursor.style.left = x + "px";
+                cursor.style.top = y + "px";
+            };
 
+            link.forEach((b) => b.addEventListener("mousemove", animateit));
+            link.forEach((b) => b.addEventListener("mouseleave", animateit));
+            window.addEventListener("mousemove", editCursor);
 
-    /* =============================================================================
-    -----------------------------  cursor Animation  -----------------------------
-    ============================================================================= */
-
-    (function () {
-        const link = document.querySelectorAll('.hover-this');
-        const cursor = document.querySelector('.cursor');
-        const animateit = function (e) {
-            const hoverAnim = this.querySelector('.hover-anim');
-            const { offsetX: x, offsetY: y } = e,
-                { offsetWidth: width, offsetHeight: height } = this,
-                move = 25,
-                xMove = x / width * (move * 2) - move,
-                yMove = y / height * (move * 2) - move;
-            hoverAnim.style.transform = `translate(${xMove}px, ${yMove}px)`;
-            if (e.type === 'mouseleave') hoverAnim.style.transform = '';
-        };
-        const editCursor = e => {
-            const { clientX: x, clientY: y } = e;
-            cursor.style.left = x + 'px';
-            cursor.style.top = y + 'px';
-        };
-        link.forEach(b => b.addEventListener('mousemove', animateit));
-        link.forEach(b => b.addEventListener('mouseleave', animateit));
-        window.addEventListener('mousemove', editCursor);
-
-        $("a, .cursor-pointer").hover(
-            function () {
-                $(".cursor").addClass("cursor-active");
-            }, function () {
-                $(".cursor").removeClass("cursor-active");
-            }
-        );
-
-
-
-        if (!window.__textAnimationDisabled) {
-            window.__textAnimationDisabled = true;
-
-            let elements = document.querySelectorAll(".rolling-text");
-
-            elements.forEach((element) => {
-                let innerText = element.innerText;
-                element.innerHTML = "";
-
-                let textContainer = document.createElement("div");
-                textContainer.classList.add("block");
-
-                for (let letter of innerText) {
-                    let span = document.createElement("span");
-                    span.innerText = letter.trim() === "" ? "\xa0" : letter;
-                    span.classList.add("letter");
-                    textContainer.appendChild(span);
+            $("a, .cursor-pointer").hover(
+                function () {
+                    $(".cursor").addClass("cursor-active");
+                },
+                function () {
+                    $(".cursor").removeClass("cursor-active");
                 }
-
-                element.appendChild(textContainer);
-                element.appendChild(textContainer.cloneNode(true));
-            });
-
-            elements.forEach((element) => {
-                element.addEventListener("mouseover", () => {
-                    element.classList.remove("play");
-                });
-            });
-        }
-
-    })();
-    /*notee up
-
-
-    /* =============================================================================
-    ////////////////////////////////////////////////////////////////////////////////
-    ============================================================================= */
-
-    $(window).on("load", function () {
-
+            );
+        })();
 
         /* =============================================================================
-        ---------------------------------  Preloader  ----------------------------------
+        -----------------------------  Window Load (Preloader + Isotope) -----------------------------
         ============================================================================= */
 
-        var body = $('body');
-        body.addClass('loaded');
-        setTimeout(function () {
-            body.removeClass('loaded');
-        }, 1500);
+        function runPreloaderAndIsotope() {
+            const body = $("body");
+            const preloader = $(".loader-wrap");
 
-
-        /* =============================================================================
-        -----------------------------  isotope Masonery   ------------------------------
-        ============================================================================= */
-
-        $('.gallery').isotope({
-            itemSelector: '.items'
-        });
-
-        var $gallery = $('.gallery').isotope();
-
-        $('.filtering').on('click', 'span', function () {
-            var filterValue = $(this).attr('data-filter');
-            $gallery.isotope({ filter: filterValue });
-        });
-
-        $('.filtering').on('click', 'span', function () {
-            $(this).addClass('active').siblings().removeClass('active');
-        });
-
-
-        /* =============================================================================
-        -----------------------------  Contact Valdition   -----------------------------
-        ============================================================================= */
-
-        $('#contact-form').validator();
-
-        $('#contact-form').on('submit', function (e) {
-            if (!e.isDefaultPrevented()) {
-                var url = "contact.php";
-
-                $.ajax({
-                    type: "POST",
-                    url: url,
-                    data: $(this).serialize(),
-                    success: function (data) {
-                        var messageAlert = 'alert-' + data.type;
-                        var messageText = data.message;
-
-                        var alertBox = '<div class="alert ' + messageAlert + ' alert-dismissable"><button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>' + messageText + '</div>';
-                        if (messageAlert && messageText) {
-                            $('#contact-form').find('.messages').html(alertBox);
-                            $('#contact-form')[0].reset();
-                        }
-                    }
-                });
-                return false;
+            // Make sure body has the initial 'loaded' state like original template
+            if (!body.hasClass("loaded")) {
+                body.addClass("loaded");
             }
-        });
 
-    });
+            // If GSAP is available and the SVG exists, run the timeline that the original template used
+            const svg = document.getElementById("svg");
+            if (window.gsap && svg) {
+                try {
+                    const tl = gsap.timeline();
 
+                    // the same curve strings from the original template
+                    const curve = "M0 502S175 272 500 272s500 230 500 230V0H0Z";
+                    const flat = "M0 2S175 1 500 1s500 1 500 1V0H0Z";
 
-    /* =============================================================================
-    -----------------------------  Button scroll up   ------------------------------
-    ============================================================================= */
-
-    $(document).ready(function () {
-
-        "use strict";
-
-        var progressPath = document.querySelector('.progress-wrap path');
-        var pathLength = progressPath.getTotalLength();
-        progressPath.style.transition = progressPath.style.WebkitTransition = 'none';
-        progressPath.style.strokeDasharray = pathLength + ' ' + pathLength;
-        progressPath.style.strokeDashoffset = pathLength;
-        progressPath.getBoundingClientRect();
-        progressPath.style.transition = progressPath.style.WebkitTransition = 'stroke-dashoffset 10ms linear';
-        var updateProgress = function () {
-            var scroll = $(window).scrollTop();
-            var height = $(document).height() - $(window).height();
-            var progress = pathLength - (scroll * pathLength / height);
-            progressPath.style.strokeDashoffset = progress;
-        }
-        updateProgress();
-        $(window).scroll(updateProgress);
-        var offset = 150;
-        var duration = 550;
-        jQuery(window).on('scroll', function () {
-            if (jQuery(this).scrollTop() > offset) {
-                jQuery('.progress-wrap').addClass('active-progress');
+                    // replicate the original sequence
+                    tl.to(".loader-wrap-heading .load-text , .loader-wrap-heading .cont", {
+                        delay: 1.5,
+                        y: -100,
+                        opacity: 0,
+                    });
+                    tl.to(svg, {
+                        duration: 0.5,
+                        attr: { d: curve },
+                        ease: "power2.easeIn",
+                    });
+                    tl.to(svg, {
+                        duration: 0.5,
+                        attr: { d: flat },
+                        ease: "power2.easeOut",
+                    });
+                    // slide loader up and hide it
+                    tl.to(".loader-wrap", { duration: 0.6, y: -1500 });
+                    tl.to(".loader-wrap", {
+                        duration: 0.05,
+                        zIndex: -1,
+                        display: "none",
+                        onComplete: function () {
+                            // mirror original: remove the 'loaded' state so any CSS transitions tied to it run
+                            body.removeClass("loaded");
+                            // remove element from DOM to avoid blocking or accidental overlays
+                            preloader.remove();
+                        },
+                    });
+                } catch (err) {
+                    // If something goes wrong with GSAP, fallback to safe behavior
+                    console.warn("GSAP timeline failed, falling back to simple preloader hide:", err);
+                    body.removeClass("loaded");
+                    preloader.fadeOut(600, () => preloader.remove());
+                }
             } else {
-                jQuery('.progress-wrap').removeClass('active-progress');
+                // Fallback: do the class toggle + fade behavior (keeps compatibility)
+                // Add a small delay so the user sees the loader briefly
+                setTimeout(() => {
+                    body.removeClass("loaded");
+                    preloader.fadeOut(600, () => preloader.remove());
+                }, 1500);
             }
-        });
-        jQuery('.progress-wrap').on('click', function (event) {
-            event.preventDefault();
-            jQuery('html, body').animate({ scrollTop: 0 }, duration);
-            return false;
-        })
 
-    });
+            // Initialize isotope safely
+            if ($(".gallery").length) {
+                const $gallery = $(".gallery").isotope({ itemSelector: ".items" });
 
-
-
-    /* =============================================================================
-    ////////////////////////////////////////////////////////////////////////////////
-    ============================================================================= */
-
-    $(function () {
-
-
-        "use strict";
-
-
-
-        /* =============================================================================
-        ----------------------------  Swiper Data Controls   ---------------------------
-        ============================================================================= */
-
-        $('[data-carousel="swiper"]').each(function () {
-
-            var containe = $(this).find('[data-swiper="container"]').attr('id');
-            var pagination = $(this).find('[data-swiper="pagination"]').attr('id');
-            var prev = $(this).find('[data-swiper="prev"]').attr('id');
-            var next = $(this).find('[data-swiper="next"]').attr('id');
-            var items = $(this).data('items');
-            var autoplay = $(this).data('autoplay');
-            var iSlide = $(this).data('initial');
-            var loop = $(this).data('loop');
-            var parallax = $(this).data('parallax');
-            var space = $(this).data('space');
-            var speed = $(this).data('speed');
-            var center = $(this).data('center');
-            var effect = $(this).data('effect');
-            var direction = $(this).data('direction');
-            var mousewheel = $(this).data('mousewheel');
-
-            // Configuration
-            var conf = {
-
-            };
-
-            // Responsive
-            if ($(this).hasClass('swiper5')) {
-                var conf = {
-
-                    breakpoints: {
-                        0: {
-                            slidesPerView: 2,
-                        },
-                        640: {
-                            slidesPerView: 3,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                        },
-                        1024: {
-                            slidesPerView: 5,
-                        },
-                    }
-                };
-            };
-
-            if ($(this).hasClass('swiper4')) {
-                var conf = {
-
-                    breakpoints: {
-                        0: {
-                            slidesPerView: 1,
-                            spaceBetween: 10,
-                        },
-                        640: {
-                            slidesPerView: 2,
-                            spaceBetween: 30,
-                        },
-                        768: {
-                            slidesPerView: 3,
-                        },
-                        1024: {
-                            slidesPerView: 4,
-                        },
-                    }
-                };
-            };
-
-            if ($(this).hasClass('resume-swiper')) {
-                var conf = {
-
-                    pagination: {
-                        el: '.resume .swiper-pagination',
-                        clickable: true,
-                    },
-
-                    breakpoints: {
-                        0: {
-                            slidesPerView: 1,
-                        },
-                        640: {
-                            slidesPerView: 1,
-                        },
-                        768: {
-                            slidesPerView: 2,
-                        },
-                        1024: {
-                            slidesPerView: 3,
-                        },
-                    }
-                };
-            };
-
-            if ($(this).hasClass('resume-swiper2')) {
-                var conf = {
-
-                    pagination: {
-                        el: '.resume .swiper-pagination',
-                        clickable: true,
-                    },
-
-                    breakpoints: {
-                        0: {
-                            slidesPerView: 1,
-                        },
-                        640: {
-                            slidesPerView: 1,
-                        },
-                        768: {
-                            slidesPerView: 2,
-                        },
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                    }
-                };
-            };
-
-            if ($(this).hasClass('testim-swiper')) {
-                var conf = {
-
-                    breakpoints: {
-                        0: {
-                            slidesPerView: 1,
-                        },
-                        640: {
-                            slidesPerView: 1,
-                        },
-                        768: {
-                            slidesPerView: 2,
-                        },
-                        1024: {
-                            slidesPerView: 3,
-                        },
-                    },
-
-                    pagination: {
-                        el: '.testimonials .swiper-pagination',
-                        clickable: true,
-                    },
-
-                    navigation: {
-                        nextEl: '.testimonials .testim-controls .swiper-button-next',
-                        prevEl: '.testimonials .testim-controls .swiper-button-prev'
-                    },
-                };
-            };
-
-            if ($(this).hasClass('testim-swiper2')) {
-                var conf = {
-
-                    breakpoints: {
-                        0: {
-                            slidesPerView: 1,
-                        },
-                        640: {
-                            slidesPerView: 1,
-                        },
-                        768: {
-                            slidesPerView: 1,
-                        },
-                        1024: {
-                            slidesPerView: 2,
-                        },
-                    },
-
-                    pagination: {
-                        el: '.testimonials .swiper-pagination',
-                        clickable: true,
-                    },
-
-                    navigation: {
-                        nextEl: '.testimonials .testim-controls .swiper-button-next',
-                        prevEl: '.testimonials .testim-controls .swiper-button-prev'
-                    },
-                };
-            };
-
-            if ($(this).hasClass('pagination')) {
-                var conf = {
-
-                    pagination: {
-                        el: '.swiper-pagination',
-                        clickable: true,
-                    },
-                };
-            };
-
-            if (items) {
-                conf.slidesPerView = items
-            };
-            if (autoplay) {
-                conf.autoplay = autoplay
-            };
-            if (iSlide) {
-                conf.initialSlide = iSlide
-            };
-            if (center) {
-                conf.centeredSlides = center
-            };
-            if (loop) {
-                conf.loop = loop
-            };
-            if (parallax) {
-                conf.parallax = parallax
-            };
-            if (space) {
-                conf.spaceBetween = space
-            };
-            if (speed) {
-                conf.speed = speed
-            };
-            if (mousewheel) {
-                conf.mousewheel = mousewheel
-            };
-            if (effect) {
-                conf.effect = effect
-            };
-            if (direction) {
-                conf.direction = direction
-            };
-            if (prev) {
-                conf.prevButton = '#' + prev
-            };
-            if (next) {
-                conf.nextButton = '#' + next
-            };
-            if (pagination) {
-                conf.pagination = '#' + pagination,
-                    conf.paginationClickable = true
-            };
-
-            // Initialization
-            if (containe) {
-                var initID = '#' + containe;
-                var init = new Swiper(initID, conf);
-            };
-        });
-
-
-        /* =============================================================================
-        -------------------------------  Preloader svg   -------------------------------
-        ============================================================================= */
-
-        const svg = document.getElementById("svg");
-        const tl = gsap.timeline();
-        const curve = "M0 502S175 272 500 272s500 230 500 230V0H0Z";
-        const flat = "M0 2S175 1 500 1s500 1 500 1V0H0Z";
-
-        tl.to(".loader-wrap-heading .load-text , .loader-wrap-heading .cont", {
-            delay: 1.5,
-            y: -100,
-            opacity: 0,
-        });
-        tl.to(svg, {
-            duration: 0.5,
-            attr: { d: curve },
-            ease: "power2.easeIn",
-        }).to(svg, {
-            duration: 0.5,
-            attr: { d: flat },
-            ease: "power2.easeOut",
-        });
-        tl.to(".loader-wrap", {
-            y: -1500,
-        });
-        tl.to(".loader-wrap", {
-            zIndex: -1,
-            display: "none",
-        });
-
-    });
-
-    $(function () {
-        if (!window.__navbarFixedOnce) {
-            window.__navbarFixedOnce = true;
-
-            var width = $(window).width();
-            if (width < 991) {
-                $(".navbar .navbar-nav").on("click", ".nav-link", function () {
-                    $(".navbar .navbar-nav .dropdown .dropdown-menu").removeClass("show");
-                    $(this).parent().find(".dropdown-menu").addClass("show");
-                });
+                $(".filtering")
+                    .off("click.filterTheme")
+                    .on("click.filterTheme", "span", function () {
+                        const filterValue = $(this).attr("data-filter");
+                        $gallery.isotope({ filter: filterValue });
+                        $(this).addClass("active").siblings().removeClass("active");
+                    });
             }
         }
 
+// ✅ Run immediately if document already loaded (React behavior)
+        if (document.readyState === "complete") {
+            runPreloaderAndIsotope();
+        } else {
+            $(window).off("load.loadTheme").on("load.loadTheme", runPreloaderAndIsotope);
+        }
+
+
+
+        /* =============================================================================
+        -----------------------------  Contact Form Submit -----------------------------
+        ============================================================================= */
+        $("#contact-form")
+            .validator()
+            .off("submit.contactTheme")
+            .on("submit.contactTheme", function (e) {
+                if (!e.isDefaultPrevented()) {
+                    const url = "contact.php";
+                    $.ajax({
+                        type: "POST",
+                        url: url,
+                        data: $(this).serialize(),
+                        success: function (data) {
+                            const messageAlert = "alert-" + data.type;
+                            const messageText = data.message;
+                            const alertBox = `<div class="alert ${messageAlert} alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        ${messageText}</div>`;
+                            if (messageAlert && messageText) {
+                                $("#contact-form")
+                                    .find(".messages")
+                                    .html(alertBox);
+                                $("#contact-form")[0].reset();
+                            }
+                        },
+                    });
+                    return false;
+                }
+            });
+
+
+        /* =============================================================================
+        -----------------------------  Button Scroll Up  -----------------------------
+        ============================================================================= */
+        $(document).ready(function () {
+            const progressPath = document.querySelector(".progress-wrap path");
+            const pathLength = progressPath.getTotalLength();
+            progressPath.style.transition = progressPath.style.WebkitTransition = "none";
+            progressPath.style.strokeDasharray = pathLength + " " + pathLength;
+            progressPath.style.strokeDashoffset = pathLength;
+            progressPath.getBoundingClientRect();
+            progressPath.style.transition = progressPath.style.WebkitTransition = "stroke-dashoffset 10ms linear";
+
+            const updateProgress = function () {
+                const scroll = $(window).scrollTop();
+                const height = $(document).height() - $(window).height();
+                const progress = pathLength - (scroll * pathLength) / height;
+                progressPath.style.strokeDashoffset = progress;
+            };
+
+            updateProgress();
+            $(window).off("scroll.scrollUpTheme").on("scroll.scrollUpTheme", function () {
+                updateProgress();
+                if ($(this).scrollTop() > 150) {
+                    $(".progress-wrap").addClass("active-progress");
+                } else {
+                    $(".progress-wrap").removeClass("active-progress");
+                }
+            });
+
+            $(".progress-wrap")
+                .off("click.scrollUpTheme")
+                .on("click.scrollUpTheme", function (event) {
+                    event.preventDefault();
+                    $("html, body").animate({ scrollTop: 0 }, 550);
+                    return false;
+                });
+        });
     });
-
 };
-
-/*-----------------------------------------------------------------------------------
-
-    Theme Name: Gilb
-    Theme URI: http://
-    Description: Creative Personal & Portfolio
-    Author: UI-ThemeZ
-    Author URI: http://themeforest.net/user/UI-ThemeZ
-    Version: 1.0
-
------------------------------------------------------------------------------------*/

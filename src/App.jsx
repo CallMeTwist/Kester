@@ -13,18 +13,42 @@ import Footer from "./components/Footer.jsx";
 
 function App() {
     useEffect(() => {
-        // This forces jQuery + plugin scripts to re-run
-        if (window.$) {
-            window.$(document).ready(function () {
-                if (window.initThemeScripts) {
-                    window.initThemeScripts(); // (we’ll create this next)
-                }
-            });
-        }
+        const initTheme = () => {
+            // Run all your jQuery plugin scripts
+            if (window.$ && window.initThemeScripts) {
+                console.log("🧩 Running theme scripts after delay");
+                window.initThemeScripts();
+            } else {
+                console.warn("⚠️ jQuery or theme scripts not ready yet");
+            }
+
+            // Initialize ScrollIt for smooth scrolling
+            if (window.jQuery && window.jQuery.scrollIt) {
+                window.jQuery.scrollIt({
+                    upKey: 38,
+                    downKey: 40,
+                    easing: "ease-in-out",
+                    scrollTime: 600,
+                    activeClass: "active",
+                    onPageChange: null,
+                    topOffset: 0,
+                });
+                console.log("✅ ScrollIt initialized");
+            } else {
+                console.warn("⚠️ ScrollIt not found — ensure it’s loaded in index.html after jQuery");
+            }
+        };
+
+        // Delay to ensure React has rendered all components
+        const timeout = setTimeout(initTheme, 800);
+
+        // Cleanup
+        return () => clearTimeout(timeout);
     }, []);
 
 
-  return (
+
+    return (
     <>
         {/*<Loader />*/}
         <div className="loader-wrap">

@@ -1350,6 +1350,7 @@ body.loaded {
 /* Menu
 -----------------------------------------------------------------*/
 .navbar {
+    position:fixed;
   margin: 0;
   width: 100%;
   background: transparent;
